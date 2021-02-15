@@ -1,0 +1,19 @@
+#!/bin/bash
+
+apt update
+apt install -y cockpit cockpit-machines virt-manager bridge-utils
+systemctl --no-pager start cockpit.socket
+systemctl --no-pager enable cockpit.socket
+systemctl --no-pager status cockpit.socket
+systemctl --no-pager start libvirtd
+systemctl --no-pager enable libvirtd
+systemctl --no-pager status libvirtd
+
+#firewall-cmd --permanent --add-service cockpit
+#firewall-cmd --reload
+
+modprobe -r kvm_intel
+modprobe kvm_intel nested=1
+
+# COPY CONFIGURATION FILES
+
