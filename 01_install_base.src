@@ -3,8 +3,8 @@
 apt update
 apt install -y network-manager unattended-upgrades
 
-systemctl stop cups avahi-daemon avahi-daemon.socket
-systemctl disable cups avahi-daemon avahi-daemon.socket
+systemctl stop cups cups.socket avahi-daemon avahi-daemon.socket
+systemctl disable cups cups.socket avahi-daemon avahi-daemon.socket
 sed 's/use-ipv4=yes/use-ipv4=no/g;s/use-ipv6=yes/use-ipv6=no/g' -i /etc/avahi/avahi-daemon.conf
 
 # COPY CONFIGURATION FILES
