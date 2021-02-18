@@ -1,10 +1,10 @@
 #!/bin/bash
 
 apt update
-apt install -y network-manager unattended-upgrades
+apt install -y unattended-upgrades
 
-systemctl stop cups cups.socket avahi-daemon avahi-daemon.socket
-systemctl disable cups cups.socket avahi-daemon avahi-daemon.socket
+systemctl --no-pager stop cups cups.socket avahi-daemon avahi-daemon.socket
+systemctl --no-pager disable cups cups.socket avahi-daemon avahi-daemon.socket
 sed 's/use-ipv4=yes/use-ipv4=no/g;s/use-ipv6=yes/use-ipv6=no/g' -i /etc/avahi/avahi-daemon.conf
 
 # COPY CONFIGURATION FILES
@@ -146,14 +146,15 @@ Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
 PASTECONFIGURATIONFILE
 # COPY CONFIGURATION FILES
 
+ethdev=$(ip r | grep "^default" | head -n1 | cut -d' ' -f 5)
+
 rm /etc/netplan/*
 cat > /etc/netplan/01-netcfg.yaml <<EOF
 network:
-	version: 2
-	renderer: NetworkManager
+        version: 2
+        renderer: networkd
+        ethernets:
+                ${ethdev}:
+                        dhcp4: true
 EOF 
-
-sed 's/managed=false/managed=true/g' -i /etc/NetworkManager/NetworkManager.conf
-systemctl restart network-manager
-
 

@@ -20,6 +20,11 @@ Just use defaults. Do **not** select any additional Snap repositories.
 
 **TODO:** Find optimal setup settings.
 
+## `01_install_base.sh` (auto updates + other stuff)
+
+1. Run `01_install_base.sh`
+2. **Check for correct netowkr configuration in `/etc/netplan/01-netcfg.yaml`**
+
 ## SSH
 
 **TODO:**
@@ -30,18 +35,55 @@ Just use defaults. Do **not** select any additional Snap repositories.
 
 ## Xpra
 
-- Server
-	- List sessions: `xpra list`
-	- List sessions for all users: `ls /home/. | while read u; do echo "${u} ###########"; su ${u} -c "xpra list"; done`
-	- Stop session `:100`: `xpra stop :100` 
-- Client
-	- Start session: `xpra --ssh=ssh start ssh://1.2.3.4/10 --dpi 96`
-	- Attach to existing session: `xpra --ssh=ssh attach ssh://1.2.3.4/10 --dpi 96`
-	- Stop session: `xpra --ssh=ssh stop ssh://1.2.3.4/10`
+### Server
 
-**TODO:**
+- List sessions:
 
-- Application menu isn't transmitted/show in Xpra system tray
+```
+xpra list
+```
+
+- List sessions for all users:
+
+```
+ls /home/. | while read u; do echo "${u} ###########"; su ${u} -c "xpra list"; done
+```
+
+- Stop session `:100`:
+
+```
+su user -c "xpra stop :100"
+```
+
+- Start HTML5 session (connect browser to 127.0.0.1:10000):
+
+```
+xpra start --bind-tcp=127.0.0.1:10000
+```
+
+### Client
+
+- Start session:
+
+```
+xpra --ssh=ssh start ssh://host/10 --dpi 96
+```
+
+- Attach to existing session:
+
+```
+xpra --ssh=ssh attach ssh://host/10 --dpi 96
+```
+
+- Stop session:
+
+```
+xpra --ssh=ssh stop ssh://host/10
+```
+
+### TODO
+
+- Must start `xpra` with exported `XDG_MENU_PREFIX=gnome-` for start menu to work
 
 ## LibVirt
 
