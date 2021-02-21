@@ -1,0 +1,15 @@
+#!/bin/bash
+
+apt update
+apt install -y virt-manager bridge-utils
+systemctl --no-pager start libvirtd
+systemctl --no-pager enable libvirtd
+systemctl --no-pager status libvirtd
+
+modprobe -r kvm_intel
+modprobe kvm_intel nested=1
+
+# COPY CONFIGURATION FILES
+
+# TODO: enable iommu
+

@@ -1,11 +1,8 @@
 #!/bin/bash
 
 apt update
-apt install -y unattended-upgrades
-
-systemctl --no-pager stop cups cups.socket avahi-daemon avahi-daemon.socket
-systemctl --no-pager disable cups cups.socket avahi-daemon avahi-daemon.socket
-sed 's/use-ipv4=yes/use-ipv4=no/g;s/use-ipv6=yes/use-ipv6=no/g' -i /etc/avahi/avahi-daemon.conf
+apt -y install unattended-upgrades
+apt -y purge avahi-daemon
 
 # COPY CONFIGURATION FILES
 mkdir -p /etc
@@ -157,4 +154,6 @@ network:
                 ${ethdev}:
                         dhcp4: true
 EOF 
+netplan apply
+netplan try
 

@@ -58,7 +58,7 @@ su user -c "xpra stop :100"
 - Start HTML5 session (connect browser to 127.0.0.1:10000):
 
 ```
-xpra start --bind-tcp=127.0.0.1:10000
+xpra start --bind-tcp=127.0.0.1:10000,auth=pam
 ```
 
 ### Client

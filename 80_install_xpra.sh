@@ -155,6 +155,7 @@ EOF
 wget -q https://xpra.org/repos/focal/xpra.list -O /etc/apt/sources.list.d/xpra.list
 apt update
 apt install -y xpra
-systemctl stop xpra
-systemctl disable xpra
+apt purge -y avahi-daemon cups-browsed cups
+systemctl --no-pager stop xpra
+systemctl --no-pager disable xpra
 
