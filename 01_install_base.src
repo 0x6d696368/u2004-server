@@ -1,8 +1,11 @@
 #!/bin/bash
 
 apt update
-apt -y install unattended-upgrades
-apt -y purge avahi-daemon
+apt -y install unattended-upgrades apt-mark
+
+# prevent some stuff that causes problems from every installing
+apt -y purge gdm3 network-manager cups avahi-daemon
+apt-mark hold gdm3 network-manager cups avahi-daemon
 
 # COPY CONFIGURATION FILES
 

@@ -158,38 +158,6 @@ apt install -y xpra python3-pip
 pip3 install pyinotify
 
 # COPY CONFIGURATION FILES
-mkdir -p /etc
-mkdir -p /etc/xpra
-cat > /etc/xpra/xpra.conf << PASTECONFIGURATIONFILE
-#
-# This is the default configuration file for Xpra
-#
-# You can provide default values for most command line
-# options here.
-#
-# The configuration files in the conf.d directory will
-# be parsed first.
-#
-# Each user may also define its own options in the file
-# ~/.xpra/xpra.conf which will take precedence over this file.
-#
-# Most options can also be overriden on the xpra command line.
-# See "xpra -h" or the man page for details.
-#
-# Syntax:
-# - Options which can be turned on or off will accept
-#   the following values: 1, 0, true, false, yes, no
-# - Options which can accept multiple values
-#   may just be specified multiple times.
-# - You may break a long line into multiple lines
-#   by ending each line with a backslash '\\'.
-printing = no
-speaker = off
-webcam = no
-pixel-depth = 16
-mdns=no
-PASTECONFIGURATIONFILE
-# COPY CONFIGURATION FILES
 
 systemctl --no-pager stop xpra
 systemctl --no-pager disable xpra
