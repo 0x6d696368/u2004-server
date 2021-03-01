@@ -25,6 +25,10 @@ Just use defaults. Do **not** select any additional Snap repositories.
 1. Run `01_install_base.sh`
 2. **Check for correct netowkr configuration in `/etc/netplan/01-netcfg.yaml`**
 
+### TODO
+
+- Automatic reboot 
+
 ## SSH
 
 **TODO:**
@@ -58,7 +62,7 @@ su user -c "xpra stop :100"
 - Start HTML5 session (connect browser to 127.0.0.1:10000):
 
 ```
-xpra start --bind-tcp=127.0.0.1:10000,auth=pam
+xpra start --bind-tcp=127.0.0.1:10000,auth=pam --env=XDG_MENU_PREFIX=gnome-
 ```
 
 ### Client
@@ -66,13 +70,13 @@ xpra start --bind-tcp=127.0.0.1:10000,auth=pam
 - Start session:
 
 ```
-xpra --ssh=ssh start ssh://host/10 --dpi 96
+xpra --ssh=ssh start ssh://host/10 --dpi 96 --env=XDG_MENU_PREFIX=gnome-
 ```
 
 - Attach to existing session:
 
 ```
-xpra --ssh=ssh attach ssh://host/10 --dpi 96
+xpra --ssh=ssh attach ssh://host/10 --dpi 96 --env=XDG_MENU_PREFIX=gnome-
 ```
 
 - Stop session:
@@ -102,6 +106,26 @@ virsh net-list
 virsh net-edit <network>
 virsh net-destroy <network>
 virsh net-start <network>
+```
+
+### CDROM
+
+- List:
+
+```
+virsh domblklist <vm_ ame>
+```
+
+- Eject:
+
+```
+virsh change-media <vm name> <device> --eject
+```
+
+- Insert:
+
+```
+change-media <vm name> <device> <iso/qcow2 path> --insert
 ```
 
 ## TODO

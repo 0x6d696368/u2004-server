@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt update
-apt -y install unattended-upgrades apt-mark
+apt -y install unattended-upgrades apt-mark needrestart
 
 # prevent some stuff that causes problems from every installing
 apt -y purge gdm3 network-manager cups avahi-daemon

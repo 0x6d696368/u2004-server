@@ -187,7 +187,8 @@ printing = no
 speaker = off
 webcam = no
 pixel-depth = 16
-mdns=no
+mdns = no
+env = XDG_MENU_PREFIX=gnome-
 PASTECONFIGURATIONFILE
 # COPY CONFIGURATION FILES
 
